@@ -1,0 +1,97 @@
+{
+    "name": "surveyDraft",
+    "displayName": "Survey Draft",
+    "version": 1,
+    "description": "Crée un brouillon de sondage via l’API RightCom",
+    "defaults": {
+      "name": "Survey Draft"
+    },
+    "inputs": ["main"],
+    "outputs": ["main"],
+    "credentials": [
+      {
+        "name": "surveyApi",
+        "required": true
+      }
+    ],
+    "requestDefaults": {
+      "baseURL": "https://rsv-api-beta.rightcomtech.com/api/v1",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Realms": "={{$parameter.realms}}"
+      }
+    },
+    "properties": [
+      {
+        "displayName": "Nom du sondage",
+        "name": "name",
+        "type": "string",
+        "default": "",
+        "required": true,
+        "routing": {
+          "send": {
+            "property": "name",
+            "type": "body"
+          }
+        }
+      },
+      {
+        "displayName": "Description",
+        "name": "description",
+        "type": "string",
+        "default": "",
+        "routing": {
+          "send": {
+            "property": "description",
+            "type": "body"
+          }
+        }
+      },
+      {
+        "displayName": "ID de l’utilisateur",
+        "name": "userId",
+        "type": "string",
+        "default": "",
+        "required": true,
+        "routing": {
+          "send": {
+            "property": "userId",
+            "type": "body"
+          }
+        }
+      },
+      {
+        "displayName": "Formulaire (JSON)",
+        "name": "formData",
+        "type": "json",
+        "default": "",
+        "routing": {
+          "send": {
+            "property": "formData",
+            "type": "body"
+          }
+        }
+      },
+      {
+        "displayName": "Réalms",
+        "name": "realms",
+        "type": "string",
+        "default": "",
+        "required": true
+      },
+      {
+        "displayName": "Opération",
+        "name": "operation",
+        "type": "hidden",
+        "default": "create",
+        "routing": {
+          "request": {
+            "method": "POST",
+            "url": "/survey/draft"
+          }
+        }
+      }
+    ]
+  }
+  
